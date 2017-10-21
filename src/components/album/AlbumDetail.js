@@ -2,7 +2,7 @@
 import React from 'react';
 
 // react-native libraries
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, Linking } from 'react-native';
 
 // component
 import AlbumCard from './AlbumCard';
@@ -10,7 +10,7 @@ import AlbumCardSection from './AlbumCardSection';
 import Button from '../button/Button';
 
 const AlbumDetail = ({ album }) => {
-  const { title, artist, thumbnail_image, image } = album;
+  const { title, artist, thumbnail_image, image, url } = album;
   const {
     thumbnailStyle,
     headerContentStyle,
@@ -39,11 +39,14 @@ const AlbumDetail = ({ album }) => {
         />
       </AlbumCardSection>
       <AlbumCardSection>
-        <Button/>
+        <Button
+          text='Buy Now'
+          onPress={() => Linking.openURL(url).catch(err => console.error('An error occurred', err))}
+        />
       </AlbumCardSection>
     </AlbumCard>
   );
-}
+};
 
 const styles = StyleSheet.create({
   headerContentStyle: {
@@ -68,6 +71,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: null,
   }
-})
+});
 
 export default AlbumDetail;
